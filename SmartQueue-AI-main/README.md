@@ -127,3 +127,5 @@ TWILIO_PHONE=+1234567890
 ## 👩‍💻 Author
 
 **Jiya Sadaria** — 24AIML054
+**Rudra Prajapati** — 24AIML053
+
