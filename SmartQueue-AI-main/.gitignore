@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.so
+.eggs/
+
+# Virtual Environments
+env/
+venv/
+.venv/
+ENV/
+.env
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Testing / Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Distribution
+*.wheel
+
+# Temp / scratch
+*.tmp
+*.bak

@@ -1,0 +1,476 @@
+/* ============================================
+   SmartQueue AI - Healthcare Page Styles
+   ============================================ */
+
+.healthcare-page {
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+/* Page Header */
+.page-header {
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
+    background: linear-gradient(180deg,
+            rgba(var(--color-healthcare-rgb), 0.1) 0%,
+            transparent 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center,
+            rgba(var(--color-healthcare-rgb), 0.1) 0%,
+            transparent 60%);
+    animation: floatSlow 20s ease-in-out infinite;
+}
+
+.page-header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.page-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-4);
+    display: block;
+}
+
+.page-title {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-3);
+}
+
+.page-title .highlight {
+    color: var(--color-healthcare);
+}
+
+.page-subtitle {
+    color: var(--color-text-secondary);
+    font-size: var(--text-lg);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Main Form Container */
+.queue-form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-6) var(--space-16);
+}
+
+/* Step Progress */
+.step-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-10);
+}
+
+.step-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.step-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: var(--color-elevated);
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    transition: all var(--transition-base);
+}
+
+.step-dot.active {
+    background: var(--color-healthcare);
+    border-color: var(--color-healthcare);
+    color: white;
+    box-shadow: 0 0 20px rgba(var(--color-healthcare-rgb), 0.4);
+}
+
+.step-dot.completed {
+    background: var(--color-success);
+    border-color: var(--color-success);
+    color: white;
+}
+
+.step-line {
+    width: 60px;
+    height: 2px;
+    background: var(--color-border);
+    transition: background var(--transition-base);
+}
+
+.step-line.completed {
+    background: var(--color-healthcare);
+}
+
+/* Form Sections */
+.form-section {
+    display: none;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.form-section.active {
+    display: block;
+}
+
+.form-section-title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-2);
+    text-align: center;
+}
+
+.form-section-subtitle {
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+/* Department Selection */
+.department-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+}
+
+.department-card {
+    padding: var(--space-6);
+    background: rgba(var(--color-surface-rgb), 0.5);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-align: center;
+}
+
+.department-card:hover {
+    border-color: var(--color-healthcare);
+    background: rgba(var(--color-surface-rgb), 0.8);
+    transform: translateY(-3px);
+}
+
+.department-card.selected {
+    border-color: var(--color-healthcare);
+    background: rgba(var(--color-healthcare-rgb), 0.1);
+    box-shadow: 0 0 30px rgba(var(--color-healthcare-rgb), 0.2);
+}
+
+.department-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-3);
+}
+
+.department-name {
+    font-weight: var(--font-semibold);
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-1);
+}
+
+.department-queue {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.department-queue strong {
+    color: var(--color-healthcare);
+}
+
+/* Doctor Selection */
+.doctor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+}
+
+.doctor-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: rgba(var(--color-surface-rgb), 0.5);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.doctor-card:hover {
+    border-color: var(--color-healthcare);
+    background: rgba(var(--color-surface-rgb), 0.8);
+}
+
+.doctor-card.selected {
+    border-color: var(--color-healthcare);
+    background: rgba(var(--color-healthcare-rgb), 0.1);
+}
+
+.doctor-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--color-healthcare), var(--color-primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xl);
+    color: white;
+    flex-shrink: 0;
+}
+
+.doctor-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.doctor-name {
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-1);
+}
+
+.doctor-specialty {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+}
+
+.doctor-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--color-success);
+}
+
+.status-indicator.busy {
+    background: var(--color-warning);
+    animation: pulse 1.5s infinite;
+}
+
+/* Priority Selection */
+.priority-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+}
+
+.priority-card {
+    padding: var(--space-6);
+    background: rgba(var(--color-surface-rgb), 0.5);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-align: center;
+}
+
+.priority-card:hover {
+    transform: translateY(-3px);
+}
+
+.priority-card.emergency:hover,
+.priority-card.emergency.selected {
+    border-color: var(--color-emergency);
+    background: rgba(var(--color-emergency-rgb), 0.1);
+}
+
+.priority-card.senior:hover,
+.priority-card.senior.selected {
+    border-color: var(--color-warning);
+    background: rgba(var(--color-warning-rgb), 0.1);
+}
+
+.priority-card.normal:hover,
+.priority-card.normal.selected {
+    border-color: var(--color-success);
+    background: rgba(var(--color-success-rgb), 0.1);
+}
+
+.priority-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-3);
+}
+
+.priority-name {
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-2);
+}
+
+.priority-card.emergency .priority-name {
+    color: var(--color-emergency);
+}
+
+.priority-card.senior .priority-name {
+    color: var(--color-warning);
+}
+
+.priority-card.normal .priority-name {
+    color: var(--color-success);
+}
+
+.priority-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+/* Patient Form */
+.patient-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+}
+
+.patient-form .form-group.full-width {
+    grid-column: span 2;
+}
+
+/* Reason for Visit */
+.quick-reasons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+}
+
+.reason-tag {
+    padding: var(--space-2) var(--space-3);
+    background: rgba(var(--color-surface-rgb), 0.5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.reason-tag:hover,
+.reason-tag.selected {
+    background: rgba(var(--color-healthcare-rgb), 0.2);
+    border-color: var(--color-healthcare);
+    color: var(--color-healthcare);
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+}
+
+.form-actions .btn {
+    min-width: 150px;
+}
+
+/* Summary Card */
+.summary-card {
+    background: rgba(var(--color-surface-rgb), 0.6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-label {
+    color: var(--color-text-muted);
+}
+
+.summary-value {
+    font-weight: var(--font-semibold);
+}
+
+.summary-value.healthcare-color {
+    color: var(--color-healthcare);
+}
+
+/* Estimated Wait */
+.estimated-wait {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: linear-gradient(135deg,
+            rgba(var(--color-healthcare-rgb), 0.1),
+            rgba(var(--color-primary-rgb), 0.05));
+    border-radius: var(--radius-xl);
+    margin-top: var(--space-6);
+}
+
+.wait-time-large {
+    font-family: var(--font-display);
+    font-size: var(--text-5xl);
+    font-weight: var(--font-extrabold);
+    color: var(--color-healthcare);
+}
+
+.wait-info {
+    text-align: left;
+}
+
+.wait-info-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.wait-info-ai {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    margin-top: var(--space-1);
+}
+
+@media (max-width: 768px) {
+
+    .department-grid,
+    .doctor-grid,
+    .priority-grid,
+    .patient-form {
+        grid-template-columns: 1fr;
+    }
+
+    .patient-form .form-group.full-width {
+        grid-column: span 1;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+}

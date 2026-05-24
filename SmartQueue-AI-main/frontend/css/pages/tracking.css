@@ -1,0 +1,274 @@
+/* ============================================
+   SmartQueue AI - Tracking Page Styles
+   ============================================ */
+
+.tracking-page {
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+.tracking-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-6);
+}
+
+.tracking-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.tracking-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-2);
+}
+
+.tracking-subtitle {
+    color: var(--color-text-secondary);
+}
+
+.tracking-card {
+    background: rgba(var(--color-surface-rgb), 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    margin-bottom: var(--space-6);
+}
+
+.tracking-card-header {
+    padding: var(--space-6);
+    background: rgba(var(--color-primary-rgb), 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.tracking-token {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.tracking-token-number {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+}
+
+.tracking-status-badge {
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    background: rgba(var(--color-warning-rgb), 0.2);
+    color: var(--color-warning);
+}
+
+.tracking-status-badge.active {
+    background: rgba(var(--color-success-rgb), 0.2);
+    color: var(--color-success);
+    animation: pulse 2s infinite;
+}
+
+.tracking-card-body {
+    padding: var(--space-8);
+}
+
+.position-display {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.position-label {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-2);
+}
+
+.position-number {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 15vw, 8rem);
+    font-weight: var(--font-extrabold);
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.position-suffix {
+    color: var(--color-text-secondary);
+    font-size: var(--text-xl);
+    margin-left: var(--space-2);
+}
+
+.position-display.your-turn .position-number {
+    background: linear-gradient(135deg, var(--color-success), #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.progress-section {
+    margin-bottom: var(--space-8);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-3);
+    font-size: var(--text-sm);
+}
+
+.progress-label {
+    color: var(--color-text-muted);
+}
+
+.progress-value {
+    font-weight: var(--font-semibold);
+    color: var(--color-primary);
+}
+
+.progress-bar {
+    height: 12px;
+    background: var(--color-elevated);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease-out;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.5);
+}
+
+.wait-time-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.wait-time-card {
+    padding: var(--space-5);
+    background: rgba(var(--color-bg-rgb), 0.5);
+    border-radius: var(--radius-xl);
+    text-align: center;
+}
+
+.wait-time-value {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+}
+
+.wait-time-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+}
+
+.queue-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+}
+
+.queue-info-item {
+    padding: var(--space-4);
+    background: rgba(var(--color-bg-rgb), 0.3);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.queue-info-icon {
+    font-size: 1.5rem;
+}
+
+.queue-info-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+}
+
+.queue-info-value {
+    font-weight: var(--font-semibold);
+    margin-top: var(--space-1);
+}
+
+.your-turn-alert {
+    background: linear-gradient(135deg, rgba(var(--color-success-rgb), 0.2), rgba(var(--color-success-rgb), 0.1));
+    border: 2px solid var(--color-success);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+    margin-top: var(--space-6);
+    animation: yourTurn 1.5s infinite;
+}
+
+.your-turn-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-4);
+}
+
+.your-turn-title {
+    font-size: var(--text-2xl);
+    color: var(--color-success);
+    margin-bottom: var(--space-2);
+}
+
+.your-turn-message {
+    color: var(--color-text-secondary);
+}
+
+.tracking-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-top: var(--space-8);
+    flex-wrap: wrap;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-6);
+    justify-content: center;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-success);
+    border-radius: var(--radius-full);
+    animation: pulse 1.5s infinite;
+}
+
+@media (max-width: 640px) {
+
+    .wait-time-section,
+    .queue-info-grid {
+        grid-template-columns: 1fr;
+    }
+}

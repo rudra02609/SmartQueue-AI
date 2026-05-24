@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Queue - SmartQueue AI</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/tracking.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+</head>
+
+<body class="tracking-page">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <div class="navbar-logo-icon">🚀</div>
+                <span>SmartQueue<span class="text-gradient">AI</span></span>
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="index.html" class="navbar-link">Home</a></li>
+                <li><a href="healthcare.html" class="navbar-link">Healthcare</a></li>
+                <li><a href="banking.html" class="navbar-link">Banking</a></li>
+                <li><a href="tracking.html" class="navbar-link active">Track Queue</a></li>
+                <li><a href="grievance.html" class="navbar-link">📋 Grievance</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="tracking-container">
+        <div class="tracking-header animate animate-fade-in-up">
+            <h1 class="tracking-title">Track Your Queue</h1>
+            <p class="tracking-subtitle">Real-time updates on your position</p>
+        </div>
+
+        <div class="tracking-card animate animate-fade-in-up delay-200">
+            <div class="tracking-card-header">
+                <div class="tracking-token">
+                    <span id="tracking-icon">🏥</span>
+                    <span class="tracking-token-number" id="tracking-token-id">H-OPD-123</span>
+                </div>
+                <div class="tracking-status-badge" id="status-badge">In Queue</div>
+            </div>
+
+            <div class="tracking-card-body">
+                <div class="position-display" id="position-display">
+                    <div class="position-label">Your Position</div>
+                    <div>
+                        <span class="position-number" id="position-number">5</span>
+                        <span class="position-suffix">in queue</span>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span class="progress-label">Queue Progress</span>
+                        <span class="progress-value" id="progress-text">5 ahead of you</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 40%;"></div>
+                    </div>
+                </div>
+
+                <div class="wait-time-section">
+                    <div class="wait-time-card">
+                        <div class="wait-time-value" id="wait-minutes">~12</div>
+                        <div class="wait-time-label">Estimated Wait (min)</div>
+                    </div>
+                    <div class="wait-time-card">
+                        <div class="wait-time-value" id="wait-eta">10:45 AM</div>
+                        <div class="wait-time-label">Expected Time</div>
+                    </div>
+                </div>
+
+                <div class="queue-info-grid">
+                    <div class="queue-info-item">
+                        <div class="queue-info-icon">📍</div>
+                        <div>
+                            <div class="queue-info-label">Service</div>
+                            <div class="queue-info-value" id="info-service">OPD</div>
+                        </div>
+                    </div>
+                    <div class="queue-info-item">
+                        <div class="queue-info-icon">👨‍⚕️</div>
+                        <div>
+                            <div class="queue-info-label">Assigned To</div>
+                            <div class="queue-info-value" id="info-assigned">Dr. Sharma</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="your-turn-alert" id="your-turn-alert" style="display: none;">
+                    <div class="your-turn-icon">🔔</div>
+                    <h2 class="your-turn-title">It's Your Turn!</h2>
+                    <p class="your-turn-message">Please proceed to the counter/room immediately</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="live-indicator">
+            <span class="live-dot"></span>
+            <span>Live updates every 30 seconds</span>
+        </div>
+
+        <div class="tracking-actions animate animate-fade-in-up delay-400">
+            <a href="index.html" class="btn btn-secondary">
+                ← Back to Home
+            </a>
+            <button class="btn btn-primary" onclick="location.reload()">
+                🔄 Refresh Status
+            </button>
+        </div>
+
+        <!-- Appeal section: shown only when emergency was rejected -->
+        <div id="appeal-section" style="display:none;max-width:480px;margin:24px auto 0;">
+            <div style="background:rgba(239,71,111,0.08);border:1px solid rgba(239,71,111,0.3);
+                border-radius:14px;padding:20px 24px;">
+                <div style="font-size:1rem;font-weight:500;color:#ef476f;margin-bottom:8px;">
+                    ⚠️ Emergency claim was rejected
+                </div>
+                <div style="font-size:0.85rem;color:var(--color-text-secondary);margin-bottom:16px;">
+                    If this was a genuine emergency, you can file an appeal within 30 minutes.
+                    Admin will review and restore your priority if verified.
+                </div>
+
+                <!-- Appeal form -->
+                <div id="appeal-form-section">
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:0.82rem;color:var(--color-text-secondary);display:block;margin-bottom:4px;">
+                            Describe your emergency (min 20 characters) *
+                        </label>
+                        <textarea id="appeal-description" rows="3"
+                            placeholder="e.g. I have severe chest pain since 30 minutes and difficulty breathing..."
+                            style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--color-border-secondary);
+                                background:var(--color-background-primary);color:var(--color-text-primary);
+                                font-size:0.88rem;resize:vertical;box-sizing:border-box;"></textarea>
+                    </div>
+                    <div style="margin-bottom:12px;">
+                        <label style="font-size:0.82rem;color:var(--color-text-secondary);display:block;margin-bottom:4px;">
+                            Reason code
+                        </label>
+                        <select id="appeal-reason-code"
+                            style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--color-border-secondary);
+                                background:var(--color-background-primary);color:var(--color-text-primary);">
+                            <option value="chest_pain">Chest pain / cardiac</option>
+                            <option value="accident">Accident / injury</option>
+                            <option value="breathing">Breathing difficulty</option>
+                            <option value="severe_pain">Severe pain</option>
+                            <option value="other">Other emergency</option>
+                        </select>
+                    </div>
+                    <div id="appeal-status-msg" style="font-size:0.82rem;min-height:18px;margin-bottom:10px;"></div>
+                    <button id="file-appeal-btn" onclick="fileAppeal()"
+                        style="width:100%;padding:12px;background:rgba(239,71,111,0.15);
+                            color:#ef476f;border:1px solid rgba(239,71,111,0.5);border-radius:10px;
+                            cursor:pointer;font-size:0.9rem;font-weight:500;">
+                        📝 File Appeal
+                    </button>
+                </div>
+
+                <!-- Appeal filed confirmation -->
+                <div id="appeal-filed-section" style="display:none;text-align:center;padding:12px 0;">
+                    <div style="font-size:1.5rem;margin-bottom:8px;">⏳</div>
+                    <div style="font-weight:500;margin-bottom:4px;">Appeal filed!</div>
+                    <div id="appeal-filed-status" style="font-size:0.85rem;color:var(--color-text-secondary);">
+                        Waiting for admin review...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/ai-predictor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+
+            // ✅ Fix 1: Read from localStorage directly (matches what forms save)
+            const raw = localStorage.getItem('currentToken');
+            const tokenData = raw ? JSON.parse(raw) : null;
+
+            if (!tokenData) {
+                document.querySelector('.tracking-card-body').innerHTML = `
+                    <div style="text-align: center; padding: var(--space-8);">
+                        <div style="font-size: 4rem; margin-bottom: var(--space-4);">🎫</div>
+                        <h3 style="margin-bottom: var(--space-2);">No Active Token</h3>
+                        <p style="color: var(--color-text-secondary); margin-bottom: var(--space-6);">Get a token first to track your queue position</p>
+                        <a href="healthcare.html" class="btn btn-healthcare">Healthcare Queue</a>
+                        <a href="banking.html" class="btn btn-banking" style="margin-left: var(--space-2);">Banking Queue</a>
+                    </div>`;
+                return;
+            }
+
+            // Set static info that doesn't change
+            const isHealthcare = tokenData.type === 'healthcare';
+            document.getElementById('tracking-icon').textContent     = isHealthcare ? '🏥' : '🏦';
+            document.getElementById('tracking-token-id').textContent = tokenData.id;
+            document.getElementById('info-service').textContent      = isHealthcare ?
+                (tokenData.department || '-').toUpperCase() : (tokenData.service || '-');
+            document.getElementById('info-assigned').textContent     = isHealthcare ?
+                (tokenData.doctor === 'any' ? 'Any Available' : tokenData.doctor || '-') :
+                (tokenData.counter || 'Counter 3');
+
+            // ✅ Fix 2: Update UI with live data from backend
+            // MIN_ARRIVAL_BUFFER must match backend constant (queue_engine.py)
+            const MIN_ARRIVAL_BUFFER = 10;
+
+            function updateUI(position, waitMinutes) {
+                // Never show negative wait time
+                const safeWait = Math.max(0, waitMinutes || 0);
+                const safePos  = Math.max(1, position || 1);
+
+                document.getElementById('position-number').textContent  = safePos;
+                document.getElementById('progress-text').textContent    = `${Math.max(0, safePos - 1)} ahead of you`;
+
+                // ── Buffer-aware ETA display ──────────────────────────────────
+                // Backend floors ETA at MIN_ARRIVAL_BUFFER when a cancellation
+                // would drop someone too low. Show a note so user understands
+                // their time is protected, not stale.
+                const waitEl = document.getElementById('wait-minutes');
+                if (safePos > 1 && safeWait <= MIN_ARRIVAL_BUFFER) {
+                    waitEl.textContent  = `~${safeWait}`;
+                    waitEl.title        = 'Your wait is protected — you have at least ' + MIN_ARRIVAL_BUFFER + ' min to arrive safely';
+
+                    // Show small buffer note if not already there
+                    if (!document.getElementById('buffer-note')) {
+                        const note = document.createElement('div');
+                        note.id = 'buffer-note';
+                        note.style.cssText = 'font-size:0.75rem;color:var(--color-text-muted);margin-top:4px;text-align:center;';
+                        note.textContent = '🛡️ Min arrival buffer active';
+                        waitEl.parentElement.appendChild(note);
+                    }
+                } else {
+                    waitEl.textContent = `~${safeWait}`;
+                    const note = document.getElementById('buffer-note');
+                    if (note) note.remove();
+                }
+
+                // Progress bar — closer to front = more filled
+                const totalEstimate = tokenData.position || 5;
+                const progress = Math.min(95, Math.max(5, ((totalEstimate - safePos + 1) / totalEstimate) * 100));
+                document.getElementById('progress-fill').style.width = `${progress}%`;
+
+                // ETA clock
+                const eta = new Date(Date.now() + safeWait * 60000);
+                document.getElementById('wait-eta').textContent = eta.toLocaleTimeString('en-US', {
+                    hour: '2-digit', minute: '2-digit'
+                });
+
+                // Your turn alert
+                if (safePos === 1) {
+                    document.getElementById('status-badge').textContent = "You're Next!";
+                    document.getElementById('status-badge').classList.add('active');
+                    document.getElementById('position-display').classList.add('your-turn');
+                    const alert = document.getElementById('your-turn-alert');
+                    if (alert) alert.style.display = 'block';
+                }
+            }
+
+            // Show initial data from localStorage first
+            updateUI(tokenData.position, tokenData.estimatedWait);
+
+            // ✅ Fix 3: Poll REAL backend every 15 seconds for live position
+            async function pollPosition() {
+                try {
+                    const update = await api.getTokenPosition(tokenData.id);
+
+                    if (update && update.position !== undefined) {
+                        // Update localStorage with fresh data
+                        tokenData.position      = update.position;
+                        tokenData.estimatedWait = update.estimated_wait;
+                        localStorage.setItem('currentToken', JSON.stringify(tokenData));
+
+                        updateUI(update.position, update.estimated_wait);
+
+                        // If token is no longer active (called/completed)
+                        if (update.status === 'in_service') {
+                            document.getElementById('status-badge').textContent = '🔔 Your Turn!';
+                            document.getElementById('status-badge').classList.add('active');
+                        } else if (update.status === 'completed' || update.status === 'cancelled') {
+                            document.getElementById('status-badge').textContent = 'Done';
+                            clearInterval(pollingInterval);
+                        }
+                    }
+                } catch (err) {
+                    console.log('Position poll failed:', err.message);
+                    // Keep showing last known data — don't break the UI
+                }
+            }
+
+            // Poll immediately then every 15 seconds
+            pollPosition();
+            const pollingInterval = setInterval(pollPosition, 15000);
+
+            // Check if emergency was rejected — show appeal section
+            if (tokenData.priority === 'emergency' || tokenData.type === 'healthcare') {
+                try {
+                    const statusRes = await api.getToken(tokenData.id);
+                    if (statusRes && statusRes.emergency_rejected) {
+                        document.getElementById('appeal-section').style.display = 'block';
+                        // Poll appeal status every 20 seconds
+                        checkAppealStatus(tokenData.id);
+                        setInterval(() => checkAppealStatus(tokenData.id), 20000);
+                    }
+                } catch {}
+            }
+        });
+
+        async function fileAppeal() {
+            const tokenData    = JSON.parse(localStorage.getItem('currentToken') || '{}');
+            const description  = document.getElementById('appeal-description').value.trim();
+            const reasonCode   = document.getElementById('appeal-reason-code').value;
+            const statusMsg    = document.getElementById('appeal-status-msg');
+            const btn          = document.getElementById('file-appeal-btn');
+
+            if (!description || description.length < 20) {
+                statusMsg.textContent = '⚠️ Please describe your emergency in at least 20 characters.';
+                statusMsg.style.color = '#ef476f';
+                return;
+            }
+
+            btn.disabled    = true;
+            btn.textContent = '⏳ Filing appeal...';
+            statusMsg.textContent = '';
+
+            try {
+                const res = await fetch(`${API_CONFIG.BASE_URL}/api/grievance/submit`, {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        token_number: tokenData.id,
+                        phone:        tokenData.phone || '',
+                        description:  description,
+                        reason_code:  reasonCode
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.detail || 'Failed');
+
+                document.getElementById('appeal-form-section').style.display   = 'none';
+                document.getElementById('appeal-filed-section').style.display  = 'block';
+                document.getElementById('appeal-filed-status').textContent     = data.message;
+
+            } catch (err) {
+                statusMsg.textContent = '❌ ' + err.message;
+                statusMsg.style.color = '#ef476f';
+                btn.disabled    = false;
+                btn.textContent = '📝 File Appeal';
+            }
+        }
+
+        async function checkAppealStatus(tokenId) {
+            try {
+                const res  = await fetch(`${API_CONFIG.BASE_URL}/api/grievance/status/${tokenId}`);
+                const data = await res.json();
+                if (!data.has_grievance) return;
+
+                const filedSection = document.getElementById('appeal-filed-section');
+                const statusEl     = document.getElementById('appeal-filed-status');
+
+                if (data.appeal_status === 'approved') {
+                    filedSection.style.display = 'block';
+                    document.getElementById('appeal-form-section').style.display = 'none';
+                    statusEl.innerHTML = '<span style="color:#06d6a0;font-weight:500;">✓ Appeal APPROVED! Emergency priority restored — please go to counter.</span>';
+                } else if (data.appeal_status === 'rejected') {
+                    filedSection.style.display = 'block';
+                    document.getElementById('appeal-form-section').style.display = 'none';
+                    statusEl.innerHTML = '<span style="color:#ef476f;">✗ Appeal denied. You remain in the normal queue.</span>';
+                } else if (data.appeal_status === 'pending') {
+                    filedSection.style.display = 'block';
+                    document.getElementById('appeal-form-section').style.display = 'none';
+                    statusEl.textContent = '⏳ ' + (data.message || 'Waiting for admin review...');
+                }
+            } catch {}
+        }
+    </script>
+</body>
+
+</html> 

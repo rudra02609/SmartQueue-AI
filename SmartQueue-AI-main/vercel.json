@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "public": true,
+  "builds": [
+    {
+      "src": "frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/frontend/index.html" },
+    { "src": "/index.html", "dest": "/frontend/index.html" },
+    { "src": "/healthcare", "dest": "/frontend/healthcare.html" },
+    { "src": "/healthcare.html", "dest": "/frontend/healthcare.html" },
+    { "src": "/banking", "dest": "/frontend/banking.html" },
+    { "src": "/banking.html", "dest": "/frontend/banking.html" },
+    { "src": "/admin", "dest": "/frontend/admin.html" },
+    { "src": "/admin.html", "dest": "/frontend/admin.html" },
+    { "src": "/grievance", "dest": "/frontend/grievance.html" },
+    { "src": "/grievance.html", "dest": "/frontend/grievance.html" },
+    { "src": "/admin-grievance", "dest": "/frontend/admin-grievance.html" },
+    { "src": "/admin-grievance.html", "dest": "/frontend/admin-grievance.html" },
+    { "src": "/token", "dest": "/frontend/token.html" },
+    { "src": "/token.html", "dest": "/frontend/token.html" },
+    { "src": "/tracking", "dest": "/frontend/tracking.html" },
+    { "src": "/tracking.html", "dest": "/frontend/tracking.html" },
+    { "src": "/(.*)", "dest": "/frontend/$1" }
+  ]
+}

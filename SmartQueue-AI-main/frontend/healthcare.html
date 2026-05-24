@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Queue - SmartQueue AI</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/healthcare.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+</head>
+<body class="healthcare-page">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <div class="navbar-logo-icon">🚀</div>
+                <span>SmartQueue<span class="text-gradient">AI</span></span>
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="index.html"    class="navbar-link">Home</a></li>
+                <li><a href="healthcare.html" class="navbar-link active">Healthcare</a></li>
+                <li><a href="banking.html"  class="navbar-link">Banking</a></li>
+                <li><a href="tracking.html" class="navbar-link">Track Queue</a></li>
+                <li><a href="grievance.html" class="navbar-link">📋 Grievance</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="page-header-content animate animate-fade-in-up">
+            <span class="page-icon">🏥</span>
+            <h1 class="page-title"><span class="highlight">Healthcare</span> Queue</h1>
+            <p class="page-subtitle">Get a virtual token or pre-book a slot for tomorrow</p>
+        </div>
+    </header>
+
+    <main class="queue-form-container">
+
+        <!-- Step progress: now 4 steps -->
+        <div class="step-progress animate animate-fade-in delay-200">
+            <div class="step-indicator"><div class="step-dot active" data-step="1">1</div></div>
+            <div class="step-line"></div>
+            <div class="step-indicator"><div class="step-dot" data-step="2">2</div></div>
+            <div class="step-line"></div>
+            <div class="step-indicator"><div class="step-dot" data-step="3">3</div></div>
+            <div class="step-line"></div>
+            <div class="step-indicator"><div class="step-dot" data-step="4">4</div></div>
+        </div>
+
+        <form id="healthcare-form">
+
+            <!-- ── Step 1: Department ─────────────────────────────────────── -->
+            <section class="form-section active" data-step="1">
+                <h2 class="form-section-title">Select Department</h2>
+                <p class="form-section-subtitle">Choose the department you need to visit</p>
+                <div class="department-grid" id="department-grid"></div>
+                <div class="form-actions">
+                    <span></span>
+                    <button type="button" class="btn btn-healthcare btn-lg next-step" disabled>
+                        Next: Select Doctor →
+                    </button>
+                </div>
+            </section>
+
+            <!-- ── Step 2: Doctor ─────────────────────────────────────────── -->
+            <section class="form-section" data-step="2">
+                <h2 class="form-section-title">Select Doctor</h2>
+                <p class="form-section-subtitle">Choose your preferred doctor or "Any Available"</p>
+                <div class="doctor-grid" id="doctor-grid"></div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary prev-step">← Back</button>
+                    <button type="button" class="btn btn-healthcare btn-lg next-step" disabled>
+                        Next: Priority & Slot →
+                    </button>
+                </div>
+            </section>
+
+            <!-- ── Step 3: Priority + Slot selection ─────────────────────── -->
+            <section class="form-section" data-step="3">
+                <h2 class="form-section-title">Priority & Time Slot</h2>
+                <p class="form-section-subtitle">Choose your priority, then optionally pre-book a slot for tomorrow</p>
+
+                <!-- Priority cards -->
+                <div class="priority-grid">
+                    <div class="priority-card emergency" data-priority="emergency">
+                        <div class="priority-icon">🚨</div>
+                        <div class="priority-name">Emergency</div>
+                        <div class="priority-desc">Critical condition requiring immediate attention</div>
+                    </div>
+                    <div class="priority-card senior" data-priority="senior">
+                        <div class="priority-icon">👴</div>
+                        <div class="priority-name">Senior Citizen</div>
+                        <div class="priority-desc">Age 60+ or persons with disabilities</div>
+                    </div>
+                    <div class="priority-card normal" data-priority="normal">
+                        <div class="priority-icon">👤</div>
+                        <div class="priority-name">Regular</div>
+                        <div class="priority-desc">Standard consultation or checkup</div>
+                    </div>
+                </div>
+
+                <!-- Slot selection (loads after priority chosen) -->
+                <div id="slot-section" style="margin-top: 24px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 8px; color: var(--color-text-primary);">
+                        📅 Pre-Book a Slot for Tomorrow
+                        <span style="font-size:0.78rem;color:var(--color-text-secondary);font-weight:400;margin-left:8px;">
+                            (optional — skip to walk-in on the day)
+                        </span>
+                    </h3>
+                    <div id="slot-grid">
+                        <div style="font-size:0.88rem;color:var(--color-text-secondary);padding:10px;">
+                            Select a priority above to see available slots.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions" style="margin-top:20px;">
+                    <button type="button" class="btn btn-secondary prev-step">← Back</button>
+                    <button type="button" class="btn btn-healthcare btn-lg next-step" disabled>
+                        Next: Your Details →
+                    </button>
+                </div>
+            </section>
+
+            <!-- ── Step 4: Patient details + OTP ─────────────────────────── -->
+            <section class="form-section" data-step="4">
+                <h2 class="form-section-title">Your Details</h2>
+                <p class="form-section-subtitle">
+                    Enter your information.
+                    <span id="otp-required-note" style="color:#06d6a0;font-size:0.85rem;display:none;">
+                        Phone verification required for slot booking.
+                    </span>
+                </p>
+
+                <div class="patient-form">
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" class="form-input" id="patient-name"
+                               placeholder="Enter your full name" required>
+                    </div>
+
+                    <!-- Phone + OTP group -->
+                    <div class="form-group">
+                        <label class="form-label">Phone Number *</label>
+                        <div style="display:flex;gap:8px;align-items:flex-start;">
+                            <input type="tel" class="form-input" id="patient-phone"
+                                   placeholder="10-digit mobile number" required
+                                   style="flex:1;">
+                            <button type="button" id="send-otp-btn"
+                                    class="btn btn-secondary"
+                                    style="white-space:nowrap;height:44px;padding:0 14px;font-size:0.85rem;">
+                                Send OTP
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- OTP input (hidden until OTP sent) -->
+                    <div class="form-group" id="otp-section" style="display:none;">
+                        <label class="form-label">Enter OTP</label>
+                        <div style="display:flex;gap:8px;align-items:flex-start;">
+                            <input type="text" class="form-input" id="otp-input"
+                                   placeholder="6-digit OTP" maxlength="6"
+                                   style="flex:1;letter-spacing:0.2em;font-size:1.1rem;">
+                            <button type="button" id="verify-otp-btn"
+                                    class="btn btn-healthcare"
+                                    style="white-space:nowrap;height:44px;padding:0 14px;font-size:0.85rem;">
+                                Verify
+                            </button>
+                        </div>
+                        <div id="otp-status"
+                             style="font-size:0.82rem;margin-top:6px;min-height:18px;"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Age</label>
+                        <input type="number" class="form-input" id="patient-age"
+                               placeholder="Your age" min="1" max="120">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Gender</label>
+                        <select class="form-select" id="patient-gender">
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">Reason for Visit</label>
+                        <input type="text" class="form-input" id="patient-reason"
+                               placeholder="Brief reason for visit">
+                    </div>
+                </div>
+
+                <!-- Booking summary -->
+                <div class="summary-card mt-8">
+                    <h3 style="margin-bottom: var(--space-4);">Booking Summary</h3>
+                    <div class="summary-row">
+                        <span class="summary-label">Department</span>
+                        <span class="summary-value" id="summary-department">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Doctor</span>
+                        <span class="summary-value" id="summary-doctor">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Priority</span>
+                        <span class="summary-value healthcare-color" id="summary-priority">-</span>
+                    </div>
+                    <div class="summary-row" id="summary-slot-row">
+                        <span class="summary-label">Slot</span>
+                        <span class="summary-value" id="summary-slot">Walk-in (no slot)</span>
+                    </div>
+                </div>
+
+                <div class="estimated-wait">
+                    <div class="wait-time-large" id="estimated-time">~12</div>
+                    <div class="wait-info">
+                        <div class="wait-info-label">Estimated Wait Time (minutes)</div>
+                        <div class="wait-info-ai">🤖 AI Predicted • 90% accuracy</div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary prev-step">← Back</button>
+                    <button type="submit" class="btn btn-healthcare btn-lg" id="submit-btn">
+                        🎫 Get My Token
+                    </button>
+                </div>
+            </section>
+
+        </form>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/healthcare-form.js"></script>
+
+    <script>
+        // Show OTP note when a slot is selected
+        const observer = new MutationObserver(() => {
+            const slotSummary = document.getElementById('summary-slot');
+            const note        = document.getElementById('otp-required-note');
+            if (!slotSummary || !note) return;
+            const hasSlot = slotSummary.textContent && slotSummary.textContent !== 'Walk-in (no slot)';
+            note.style.display = hasSlot ? 'inline' : 'none';
+        });
+        const slotEl = document.getElementById('summary-slot');
+        if (slotEl) observer.observe(slotEl, { childList: true, characterData: true, subtree: true });
+    </script>
+</body>
+</html>

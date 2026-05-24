@@ -1,0 +1,312 @@
+/* ============================================
+   SmartQueue AI - Admin Dashboard Styles
+   ============================================ */
+
+.admin-page {
+    min-height: 100vh;
+    padding-top: 80px;
+    background: var(--color-bg);
+}
+
+.admin-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--space-6);
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+}
+
+.admin-title {
+    font-size: var(--text-3xl);
+}
+
+.admin-actions {
+    display: flex;
+    gap: var(--space-3);
+}
+
+/* Stats Grid */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+}
+
+.stat-card {
+    background: rgba(var(--color-surface-rgb), 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+}
+
+.stat-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-3);
+}
+
+.stat-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.stat-card-icon.healthcare {
+    background: rgba(var(--color-healthcare-rgb), 0.2);
+}
+
+.stat-card-icon.banking {
+    background: rgba(var(--color-banking-rgb), 0.2);
+}
+
+.stat-card-icon.success {
+    background: rgba(var(--color-success-rgb), 0.2);
+}
+
+.stat-card-icon.warning {
+    background: rgba(var(--color-warning-rgb), 0.2);
+}
+
+.stat-card-value {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+}
+
+.stat-card-label {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    margin-top: var(--space-1);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-6);
+}
+
+.dashboard-card {
+    background: rgba(var(--color-surface-rgb), 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.dashboard-card-header {
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-card-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+}
+
+.dashboard-card-body {
+    padding: var(--space-5);
+}
+
+/* Queue Table */
+.queue-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.queue-table th,
+.queue-table td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.queue-table th {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+}
+
+.queue-table tr:hover {
+    background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.queue-token {
+    font-family: var(--font-display);
+    font-weight: var(--font-semibold);
+    color: var(--color-primary);
+}
+
+.queue-priority {
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+}
+
+.queue-priority.emergency {
+    background: rgba(var(--color-emergency-rgb), 0.2);
+    color: var(--color-emergency);
+}
+
+.queue-priority.senior {
+    background: rgba(var(--color-warning-rgb), 0.2);
+    color: var(--color-warning);
+}
+
+.queue-priority.normal {
+    background: rgba(var(--color-success-rgb), 0.2);
+    color: var(--color-success);
+}
+
+.queue-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.queue-actions button {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--text-xs);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-fast);
+}
+
+.btn-call {
+    background: var(--color-success);
+    color: white;
+}
+
+.btn-call:hover {
+    background: #22c55e;
+}
+
+.btn-skip {
+    background: var(--color-warning);
+    color: var(--color-bg);
+}
+
+.btn-skip:hover {
+    background: #f59e0b;
+}
+
+/* Activity List */
+.activity-list {
+    list-style: none;
+}
+
+.activity-item {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.activity-icon.served {
+    background: rgba(var(--color-success-rgb), 0.2);
+}
+
+.activity-icon.joined {
+    background: rgba(var(--color-primary-rgb), 0.2);
+}
+
+.activity-icon.called {
+    background: rgba(var(--color-warning-rgb), 0.2);
+}
+
+.activity-text {
+    font-size: var(--text-sm);
+}
+
+.activity-time {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+}
+
+/* Login Form */
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: var(--space-6);
+}
+
+.login-card {
+    background: rgba(var(--color-surface-rgb), 0.6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    text-align: center;
+}
+
+.login-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-4);
+}
+
+.login-title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-2);
+}
+
+.login-subtitle {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+.login-form .form-group {
+    text-align: left;
+}
+
+@media (max-width: 1024px) {
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .queue-table {
+        font-size: var(--text-sm);
+    }
+}

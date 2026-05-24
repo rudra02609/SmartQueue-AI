@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SmartQueue AI - Intelligent queue management for healthcare and banking. Get virtual tokens, AI-predicted wait times, and wait anywhere.">
+  <title>SmartQueue AI - No More Lines</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/landing.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+</head>
+<body class="landing-page">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <div class="navbar-logo-icon">🚀</div>
+        <span>SmartQueue<span class="text-gradient">AI</span></span>
+      </a>
+      
+      <button class="navbar-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <ul class="navbar-nav">
+        <li><a href="#features" class="navbar-link">Features</a></li>
+        <li><a href="#how-it-works" class="navbar-link">How It Works</a></li>
+        <li><a href="healthcare.html" class="navbar-link">Healthcare</a></li>
+        <li><a href="banking.html" class="navbar-link">Banking</a></li>
+        <li><a href="grievance.html" class="navbar-link">📋 Grievance</a></li>
+        <li><a href="admin.html" class="btn btn-primary btn-sm">Admin</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background">
+      <canvas id="particles-canvas"></canvas>
+      <div class="hero-gradient"></div>
+    </div>
+    
+    <div class="hero-content animate animate-fade-in-up">
+      <div class="hero-badge animate animate-fade-in delay-200">
+        <span>🤖</span>
+        <span>Powered by AI</span>
+      </div>
+      
+      <h1 class="hero-title animate animate-fade-in-up delay-300">
+        No More Standing
+        <span class="hero-title-highlight">In Lines</span>
+      </h1>
+      
+      <p class="hero-subtitle animate animate-fade-in-up delay-400">
+        Get a virtual token, wait anywhere, and know exactly when it's your turn. 
+        AI-predicted wait times with 90%+ accuracy.
+      </p>
+      
+      <div class="hero-cta animate animate-fade-in-up delay-500">
+        <a href="#domains" class="btn btn-primary btn-lg">
+          Get Started
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#how-it-works" class="btn btn-secondary btn-lg">
+          See How It Works
+        </a>
+      </div>
+    </div>
+    
+    <div class="hero-scroll-indicator">
+      <span>Scroll to explore</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Domain Selection -->
+  <section class="domains-section" id="domains">
+    <div class="section-header reveal">
+      <span class="section-tag">Choose Your Domain</span>
+      <h2 class="section-title">Where Do You Need to Queue?</h2>
+      <p class="section-subtitle">Select your service to get started with intelligent queue management</p>
+    </div>
+    
+    <div class="domains-grid reveal-stagger">
+      <a href="healthcare.html" class="domain-card-large healthcare">
+        <div class="domain-icon">🏥</div>
+        <h3>Healthcare</h3>
+        <p>Hospitals, clinics, and medical facilities with smart priority for emergencies</p>
+        <ul class="domain-features">
+          <li>Emergency priority system</li>
+          <li>Doctor-wise queues</li>
+          <li>Department routing</li>
+          <li>Senior citizen priority</li>
+        </ul>
+        <span class="domain-cta">
+          Enter Healthcare Queue
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+      
+      <a href="banking.html" class="domain-card-large banking">
+        <div class="domain-icon">🏦</div>
+        <h3>Banking</h3>
+        <p>Banks and financial institutions with service-based queue optimization</p>
+        <ul class="domain-features">
+          <li>Service-based routing</li>
+          <li>Counter load balancing</li>
+          <li>Premium customer lanes</li>
+          <li>Multi-service tokens</li>
+        </ul>
+        <span class="domain-cta">
+          Enter Banking Queue
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section" id="features">
+    <div class="section-header reveal">
+      <span class="section-tag">Why SmartQueue AI?</span>
+      <h2 class="section-title">Intelligent Features</h2>
+      <p class="section-subtitle">Experience queue management like never before</p>
+    </div>
+    
+    <div class="features-grid reveal-stagger">
+      <div class="feature-card">
+        <div class="feature-icon">🎫</div>
+        <h3>Virtual Tokens</h3>
+        <p>Get a digital queue number instantly. No paper tickets, no physical presence required.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>AI Predictions</h3>
+        <p>Our AI predicts your wait time with 90%+ accuracy, updated every 30 seconds.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Smart Priorities</h3>
+        <p>Emergencies and seniors get automatic priority. Fair, transparent, zero bias.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Real-Time Updates</h3>
+        <p>Track your position live. Get notified when you're next in line.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Analytics Dashboard</h3>
+        <p>Comprehensive insights for administrators to optimize service delivery.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure & Private</h3>
+        <p>Your data is encrypted and protected. Role-based access control.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works-section" id="how-it-works">
+    <div class="section-header reveal">
+      <span class="section-tag">Simple Process</span>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">Get started in just a few simple steps</p>
+    </div>
+    
+    <div class="steps-container reveal-stagger">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-icon">📝</div>
+        <h4>Select Service</h4>
+        <p>Choose your service type and department</p>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-icon">🎫</div>
+        <h4>Get Token</h4>
+        <p>Receive your virtual queue number instantly</p>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-icon">☕</div>
+        <h4>Wait Anywhere</h4>
+        <p>Wait at home, car, or nearby café</p>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-icon">🔔</div>
+        <h4>Get Notified</h4>
+        <p>Receive alert when it's your turn</p>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-icon">✅</div>
+        <h4>Get Served</h4>
+        <p>Visit counter and complete your service</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-grid reveal-stagger">
+      <div class="stat-item">
+        <div class="stat-number" data-count="73" data-suffix="%">0%</div>
+        <div class="stat-label">Wait Time Reduction</div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-number" data-count="85" data-suffix="%">0%</div>
+        <div class="stat-label">Less Crowding</div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-number" data-count="90" data-suffix="%">0%</div>
+        <div class="stat-label">Prediction Accuracy</div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-number" data-count="47" data-suffix="%">0%</div>
+        <div class="stat-label">Satisfaction Increase</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-card reveal">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Skip the Queue?</h2>
+        <p class="cta-subtitle">Join thousands of happy users who never stand in line anymore</p>
+        <div class="cta-buttons">
+          <a href="healthcare.html" class="btn btn-healthcare btn-lg">
+            🏥 Healthcare Queue
+          </a>
+          <a href="banking.html" class="btn btn-banking btn-lg">
+            🏦 Banking Queue
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="index.html" class="navbar-logo">
+          <div class="navbar-logo-icon">🚀</div>
+          <span>SmartQueue<span class="text-gradient">AI</span></span>
+        </a>
+        <p>Intelligent queue management powered by AI. No more wasted time standing in lines.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4 class="footer-title">Product</h4>
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="healthcare.html">Healthcare</a></li>
+          <li><a href="banking.html">Banking</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4 class="footer-title">Admin</h4>
+        <ul class="footer-links">
+          <li><a href="admin.html">Dashboard</a></li>
+          <li><a href="admin.html#analytics">Analytics</a></li>
+          <li><a href="admin.html#settings">Settings</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4 class="footer-title">Resources</h4>
+        <ul class="footer-links">
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API Reference</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 SmartQueue AI. All rights reserved. Built with ❤️ for better queues.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

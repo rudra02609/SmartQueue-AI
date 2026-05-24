@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Token - SmartQueue AI</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/token.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎫</text></svg>">
+    <style>
+        .booking-banner {
+            background: linear-gradient(135deg, rgba(6,214,160,0.12), rgba(0,180,216,0.08));
+            border: 1px solid rgba(6,214,160,0.35);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 0 auto 24px;
+            max-width: 480px;
+            text-align: center;
+        }
+        .booking-banner .banner-icon   { font-size: 2rem; margin-bottom: 6px; }
+        .booking-banner .banner-title  { font-size: 1.1rem; font-weight: 600; color: #06d6a0; margin-bottom: 4px; }
+        .booking-banner .banner-detail { font-size: 0.88rem; color: var(--color-text-secondary); }
+        .booking-banner .banner-time   { font-size: 1.5rem; font-weight: 700; color: var(--color-text-primary); margin: 6px 0 2px; }
+
+        .walkin-banner {
+            background: rgba(168,85,247,0.08);
+            border: 1px solid rgba(168,85,247,0.25);
+            border-radius: 14px;
+            padding: 14px 20px;
+            margin: 0 auto 24px;
+            max-width: 480px;
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--color-text-secondary);
+        }
+    </style>
+</head>
+<body class="token-page">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <div class="navbar-logo-icon">🚀</div>
+                <span>SmartQueue<span class="text-gradient">AI</span></span>
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="index.html"    class="navbar-link">Home</a></li>
+                <li><a href="healthcare.html" class="navbar-link">Healthcare</a></li>
+                <li><a href="banking.html"  class="navbar-link">Banking</a></li>
+                <li><a href="tracking.html" class="navbar-link">Track Queue</a></li>
+                <li><a href="grievance.html" class="navbar-link">📋 Grievance</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="token-container">
+        <div class="token-success-icon">✓</div>
+        <h1 class="token-success-title" id="page-title">Token Generated!</h1>
+        <p class="token-success-subtitle" id="page-subtitle">
+            Your virtual queue token has been created successfully
+        </p>
+
+        <!-- Booking type banner (filled by JS) -->
+        <div id="booking-banner"></div>
+
+        <!-- Token card -->
+        <div class="token-card-display" id="token-card">
+            <div class="token-card-inner">
+                <div class="token-type-badge" id="token-badge">
+                    <span id="token-icon">🏥</span>
+                    <span id="token-type-text">Healthcare</span>
+                </div>
+
+                <div class="token-number-display" id="token-number">H-OPD-123</div>
+                <div class="token-label">Your Queue Number</div>
+
+                <div class="token-details">
+                    <div class="token-detail">
+                        <div class="token-detail-label">Position</div>
+                        <div class="token-detail-value" id="token-position">#1 in queue</div>
+                    </div>
+                    <div class="token-detail">
+                        <div class="token-detail-label">Service</div>
+                        <div class="token-detail-value" id="token-service">OPD</div>
+                    </div>
+                    <div class="token-detail">
+                        <div class="token-detail-label">Name</div>
+                        <div class="token-detail-value" id="token-name">-</div>
+                    </div>
+                    <div class="token-detail">
+                        <div class="token-detail-label" id="token-time-label">Booked At</div>
+                        <div class="token-detail-value" id="token-time">-</div>
+                    </div>
+                </div>
+
+                <div class="token-wait-preview" id="wait-preview">
+                    <div class="token-wait-time" id="token-wait">~12</div>
+                    <div class="token-wait-info">
+                        <div class="token-wait-label" id="wait-label">Estimated Wait (min)</div>
+                        <div class="token-wait-ai">🤖 AI Predicted</div>
+                    </div>
+                </div>
+
+                <!-- Appointment time for pre-booked -->
+                <div id="appointment-info" style="display:none;
+                     background:rgba(6,214,160,0.08);border-radius:10px;
+                     padding:12px 16px;margin:12px 0;text-align:center;">
+                    <div style="font-size:0.78rem;color:var(--color-text-secondary);margin-bottom:4px;">
+                        Your appointment slot
+                    </div>
+                    <div id="appt-date"
+                         style="font-size:1rem;font-weight:600;color:#06d6a0;"></div>
+                    <div id="appt-time"
+                         style="font-size:1.3rem;font-weight:700;color:var(--color-text-primary);"></div>
+                    <div style="font-size:0.75rem;color:var(--color-text-secondary);margin-top:4px;">
+                        Please arrive 5 minutes early. Token expires 15 min after slot time.
+                    </div>
+                </div>
+
+                <div class="token-qr-placeholder" id="qr-code">
+                    <svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="7" height="7" fill="#1a1a2e"/>
+                        <rect x="1" y="1" width="5" height="5" fill="white"/>
+                        <rect x="2" y="2" width="3" height="3" fill="#1a1a2e"/>
+                        <rect x="14" y="0" width="7" height="7" fill="#1a1a2e"/>
+                        <rect x="15" y="1" width="5" height="5" fill="white"/>
+                        <rect x="16" y="2" width="3" height="3" fill="#1a1a2e"/>
+                        <rect x="0" y="14" width="7" height="7" fill="#1a1a2e"/>
+                        <rect x="1" y="15" width="5" height="5" fill="white"/>
+                        <rect x="2" y="16" width="3" height="3" fill="#1a1a2e"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="token-actions">
+            <a href="tracking.html" class="btn btn-primary btn-lg">📍 Track My Queue</a>
+            <button class="btn btn-secondary btn-lg" id="download-token-btn">⬇️ Download Token</button>
+        </div>
+
+        <!-- Toast Notification Container -->
+        <div id="toast-container" class="toast-container"></div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/token-display.js"></script>
+
+    <script>
+    // Override token display to handle both booking types
+    document.addEventListener('DOMContentLoaded', () => {
+        const tokenData = JSON.parse(localStorage.getItem('currentToken') || 'null');
+        if (!tokenData) { window.location.href = 'index.html'; return; }
+
+        const isHealthcare  = tokenData.type === 'healthcare';
+        const isAdvance     = tokenData.bookingType === 'advance';
+        const card          = document.getElementById('token-card');
+        const badge         = document.getElementById('token-badge');
+
+        card.classList.add(tokenData.type);
+        badge.classList.add(tokenData.type);
+
+        document.getElementById('token-icon').textContent      = isHealthcare ? '🏥' : '🏦';
+        document.getElementById('token-type-text').textContent = isHealthcare ? 'Healthcare' : 'Banking';
+        document.getElementById('token-number').textContent    = tokenData.id;
+        document.getElementById('token-name').textContent      = tokenData.name || '-';
+        document.getElementById('token-service').textContent   = isHealthcare
+            ? (tokenData.department || '-').toUpperCase()
+            : (tokenData.service    || '-');
+
+        if (isAdvance) {
+            // ── Pre-booked token display ──────────────────────────────────
+            document.getElementById('page-title').textContent    = 'Appointment Confirmed!';
+            document.getElementById('page-subtitle').textContent = 'Your slot is reserved for tomorrow';
+            document.getElementById('token-position').textContent = `#${tokenData.slotPosition || 1} in slot`;
+            document.getElementById('token-time-label').textContent = 'Booked For';
+            document.getElementById('token-time').textContent =
+                tokenData.appointmentDate
+                    ? new Date(tokenData.appointmentDate + 'T00:00').toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'})
+                    : '-';
+
+            // Show appointment info block
+            const apptInfo = document.getElementById('appointment-info');
+            apptInfo.style.display = 'block';
+            document.getElementById('appt-date').textContent =
+                tokenData.appointmentDate
+                    ? new Date(tokenData.appointmentDate + 'T00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'})
+                    : '';
+            document.getElementById('appt-time').textContent =
+                tokenData.slotTime
+                    ? `${tokenData.slotTime}${tokenData.slotEnd ? ' – ' + tokenData.slotEnd : ''}`
+                    : '';
+
+            // Hide live wait time (not applicable until day of)
+            document.getElementById('wait-preview').style.display = 'none';
+
+            // Booking banner
+            document.getElementById('booking-banner').innerHTML = `
+                <div class="booking-banner">
+                    <div class="banner-icon">📅</div>
+                    <div class="banner-title">Slot Pre-Booked!</div>
+                    <div class="banner-time">${tokenData.slotTime || ''}</div>
+                    <div class="banner-detail">
+                        ${tokenData.message || 'Your appointment is confirmed for tomorrow.'}
+                    </div>
+                </div>`;
+        } else {
+            // ── Walk-in token display ─────────────────────────────────────
+            document.getElementById('token-position').textContent  = `#${tokenData.position || 1} in queue`;
+            document.getElementById('token-time-label').textContent = 'Joined At';
+            document.getElementById('token-time').textContent =
+                tokenData.timestamp
+                    ? new Date(tokenData.timestamp).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})
+                    : '-';
+            document.getElementById('token-wait').textContent = `~${tokenData.estimatedWait || 0}`;
+
+            document.getElementById('booking-banner').innerHTML = `
+                <div class="walkin-banner">
+                    🚶 Walk-in token — you are currently in the live queue.
+                    Track your position on the next page.
+                </div>`;
+        }
+    });
+    </script>
+</body>
+</html>

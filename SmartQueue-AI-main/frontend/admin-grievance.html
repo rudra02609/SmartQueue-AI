@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Grievance Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-color: #0a0a0f;
+      --card-bg: #12121a;
+      --green: #00e5a0;
+      --red: #ff4d6d;
+      --yellow: #f9c846;
+      --text-primary: #e0e0e0;
+      --text-muted: #a0a0a0;
+    }
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg-color);
+      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    h1 {
+      font-family: "Syne", sans-serif;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--green);
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+    th { color: var(--yellow); }
+    .btn {
+      padding: 0.5rem 0.9rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      transition: background 0.2s;
+    }
+    .btn-approve { background: var(--green); color: #000; }
+    .btn-approve:hover { background: #00c58a; }
+    .btn-reject { background: var(--red); color: #000; }
+    .btn-reject:hover { background: #e0435a; }
+    .status-msg { margin-top: 1rem; }
+    .error { color: var(--red); }
+    .success { color: var(--green); }
+    .note-input { width: 100%; padding: 0.4rem; border: 1px solid #333; border-radius: 4px; background: #1a1a24; color: var(--text-primary); font-family: inherit; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Admin Grievance Dashboard</h1>
+    <div id="message" class="status-msg"></div>
+    <table id="grievanceTable">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Phone</th>
+          <th>Reason</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Resolution Note</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const apiBase = "http://127.0.0.1:8080";
+    const token = "YOUR_ADMIN_JWT_HERE"; // TODO: replace with real token
+    const tableBody = document.querySelector('#grievanceTable tbody');
+    const messageDiv = document.getElementById('message');
+    let refreshInterval = null;
+
+    function showMessage(msg, type='') {
+      messageDiv.textContent = msg;
+      messageDiv.className = '';
+      if (type) messageDiv.classList.add(type);
+    }
+
+    async function fetchPending() {
+      try {
+        const resp = await fetch(`${apiBase}/api/grievance/list?status=pending`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!resp.ok) throw new Error(`Status ${resp.status}`);
+        const data = await resp.json();
+        renderTable(data);
+        showMessage('');
+      } catch (e) {
+        console.error(e);
+        showMessage('Failed to load grievances.', 'error');
+      }
+    }
+
+    function renderTable(items) {
+  tableBody.innerHTML = '';
+  items.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${item.token_number || ''}</td>
+      <td>${item.phone || ''}</td>
+      <td style="color:${colorForReason(item.reason_code)};">${displayReason(item.reason_code)}</td>
+      <td>${item.description || ''}</td>
+      <td>${item.status || 'pending'}</td>
+      <td><input type="text" class="note-input" placeholder="Resolution note" data-id="${item.id}" /></td>
+      <td>
+        <button class="btn btn-approve" data-id="${item.id}">Approve</button>
+        <button class="btn btn-reject" data-id="${item.id}">Reject</button>
+      </td>
+    `;
+    tableBody.appendChild(tr);
+  });
+}
+
+// Reason handling utilities
+function colorForReason(reason) {
+  const r = reason ? reason.toString().toLowerCase() : '';
+  switch (r) {
+    case 'emergency': return 'var(--red)';
+    case 'senior': return 'var(--yellow)';
+    default: return 'var(--green)'; // regular or unknown
+  }
+}
+
+function displayReason(reason) {
+  const r = reason ? reason.toString().toLowerCase() : '';
+  switch (r) {
+    case 'emergency': return 'Emergency';
+    case 'senior': return 'Senior Citizen';
+    default: return 'Regular';
+  }
+}
+  tableBody.innerHTML = '';
+  items.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${item.token_number || ''}</td>
+      <td>${item.phone || ''}</td>
+      <td style="color:${colorForReason(item.reason_code)};">${displayReason(item.reason_code)}</td>
+      <td>${item.description || ''}</td>
+      <td>${item.status || 'pending'}</td>
+      <td><input type="text" class="note-input" placeholder="Resolution note" data-id="${item.id}" /></td>
+      <td>
+        <button class="btn btn-approve" data-id="${item.id}">Approve</button>
+        <button class="btn btn-reject" data-id="${item.id}">Reject</button>
+      </td>
+    `;
+    tableBody.appendChild(tr);
+  });
+}
+
+// Reason handling utilities
+function colorForReason(reason) {
+  const r = reason ? reason.toString().toLowerCase() : '';
+  switch (r) {
+    case 'emergency': return 'var(--red)';
+    case 'senior': return 'var(--yellow)';
+    default: return 'var(--green)'; // regular or unknown
+  }
+}
+
+function displayReason(reason) {
+  const r = reason ? reason.toString().toLowerCase() : '';
+  switch (r) {
+    case 'emergency': return 'Emergency';
+    case 'senior': return 'Senior Citizen';
+    default: return 'Regular';
+  }
+}
+      tableBody.innerHTML = '';
+      items.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.token_number || ''}</td>
+          <td>${item.phone || ''}</td>
+          <td style="color:${colorForReason(item.reason_code)};">${item.reason_code}</td>
+          <td>${item.description || ''}</td>
+          <td>${item.status || 'pending'}</td>
+          <td><input type="text" class="note-input" placeholder="Resolution note" data-id="${item.id}" /></td>
+          <td>
+            <button class="btn btn-approve" data-id="${item.id}">Approve</button>
+            <button class="btn btn-reject" data-id="${item.id}">Reject</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+                // Reason handling utilities
+        function colorForReason(reason) {
+          const r = reason ? reason.toString().toLowerCase() : '';
+          switch (r) {
+            case 'emergency': return 'var(--red)';
+            case 'senior': return 'var(--yellow)';
+            default: return 'var(--green)'; // regular or unknown
+          }
+        }
+
+        function displayReason(reason) {
+          const r = reason ? reason.toString().toLowerCase() : '';
+          switch (r) {
+            case 'emergency': return 'Emergency';
+            case 'senior': return 'Senior Citizen';
+            default: return 'Regular';
+          }
+        }
+          const r = reason ? reason.toString().toLowerCase() : '';
+          switch (r) {
+            case 'emergency': return 'var(--red)';
+            case 'senior': return 'var(--yellow)';
+            default: return 'var(--green)'; // treat unknown or regular as normal (green)
+          }
+        }
+
+        function displayReason(reason) {
+          const r = reason ? reason.toString().toLowerCase() : '';
+          switch (r) {
+            case 'emergency': return 'Emergency';
+            case 'senior': return 'Senior Citizen';
+            default: return 'Regular';
+          }
+        }
+          const r = reason ? reason.toString().toLowerCase() : '';
+          switch (r) {
+            case 'emergency': return 'var(--red)';
+            case 'senior': return 'var(--yellow)';
+            case 'regular': return 'var(--green)';
+            default: return 'var(--text-primary)';
+          }
+        }
+
+        function displayReason(reason) {
+          const r = reason ? reason.toString().toLowerCase() : '';
+          switch (r) {
+            case 'emergency': return 'Emergency';
+            case 'senior': return 'Senior Citizen';
+            case 'regular': return 'Regular';
+            default: return reason || '';
+          }
+        }
+      switch (reason) {
+        case 'emergency': return 'var(--red)';
+        case 'senior': return 'var(--yellow)';
+        case 'regular': return 'var(--green)';
+        default: return 'var(--text-primary)';
+      }
+    }
+
+    async function handleAction(id, action) {
+      const noteInput = document.querySelector(`input.note-input[data-id="${id}"]`);
+      const note = noteInput ? noteInput.value.trim() : '';
+      if (!note) { showMessage('Resolution note required.', 'error'); return; }
+      const endpoint = `${apiBase}/api/grievance/${id}/${action}`;
+      try {
+        const resp = await fetch(endpoint, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ resolution_note: note, resolved_by: 'admin' })
+        });
+        if (!resp.ok) throw new Error(`Status ${resp.status}`);
+        showMessage(`Grievance ${action}d successfully.`, 'success');
+        fetchPending(); // refresh list
+      } catch (e) {
+        console.error(e);
+        showMessage(`Failed to ${action} grievance.`, 'error');
+      }
+    }
+
+    // Delegated event handling for approve/reject buttons
+    tableBody.addEventListener('click', e => {
+      if (e.target.matches('button.btn-approve')) {
+        const id = e.target.dataset.id;
+        handleAction(id, 'approve');
+      } else if (e.target.matches('button.btn-reject')) {
+        const id = e.target.dataset.id;
+        handleAction(id, 'reject');
+      }
+    });
+
+    // Initial load and periodic refresh
+    fetchPending();
+    if (refreshInterval) clearInterval(refreshInterval);
+    refreshInterval = setInterval(fetchPending, 60000);
+  </script>
+</body>
+</html>

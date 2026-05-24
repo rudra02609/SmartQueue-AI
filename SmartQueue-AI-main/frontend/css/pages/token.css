@@ -1,0 +1,215 @@
+/* ============================================
+   SmartQueue AI - Token Page Styles
+   ============================================ */
+
+.token-page {
+    min-height: 100vh;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.token-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8) var(--space-6);
+    text-align: center;
+}
+
+.token-success-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--color-success), #22c55e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin-bottom: var(--space-6);
+    animation: scaleInBounce 0.6s ease-out;
+    box-shadow: 0 0 40px rgba(var(--color-success-rgb), 0.4);
+}
+
+.token-success-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-2);
+    animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+.token-success-subtitle {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-8);
+    animation: fadeInUp 0.5s ease-out 0.3s both;
+}
+
+.token-card-display {
+    background: rgba(var(--color-surface-rgb), 0.6);
+    backdrop-filter: blur(30px);
+    border: 2px solid rgba(var(--color-primary-rgb), 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-10) var(--space-12);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.5s ease-out 0.4s both;
+    max-width: 450px;
+    width: 100%;
+}
+
+.token-card-display::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(var(--color-primary-rgb), 0.1) 60deg, transparent 120deg);
+    animation: spin 15s linear infinite;
+}
+
+.token-card-display.healthcare {
+    border-color: rgba(var(--color-healthcare-rgb), 0.4);
+}
+
+.token-card-display.healthcare::before {
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(var(--color-healthcare-rgb), 0.1) 60deg, transparent 120deg);
+}
+
+.token-card-display.banking {
+    border-color: rgba(var(--color-banking-rgb), 0.4);
+}
+
+.token-card-display.banking::before {
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(var(--color-banking-rgb), 0.1) 60deg, transparent 120deg);
+}
+
+.token-card-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.token-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-4);
+}
+
+.token-type-badge.healthcare {
+    background: rgba(var(--color-healthcare-rgb), 0.2);
+    color: var(--color-healthcare);
+}
+
+.token-type-badge.banking {
+    background: rgba(var(--color-banking-rgb), 0.2);
+    color: var(--color-banking);
+}
+
+.token-number-display {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: var(--font-extrabold);
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-2);
+    animation: glow 2s ease-in-out infinite;
+}
+
+.token-label {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-6);
+}
+
+.token-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    text-align: left;
+}
+
+.token-detail {
+    padding: var(--space-3);
+    background: rgba(var(--color-bg-rgb), 0.5);
+    border-radius: var(--radius-lg);
+}
+
+.token-detail-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-bottom: var(--space-1);
+}
+
+.token-detail-value {
+    font-weight: var(--font-semibold);
+}
+
+.token-wait-preview {
+    margin-top: var(--space-6);
+    padding: var(--space-4);
+    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1), rgba(var(--color-secondary-rgb), 0.05));
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+}
+
+.token-wait-time {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: var(--font-extrabold);
+    color: var(--color-primary);
+}
+
+.token-wait-info {
+    text-align: left;
+}
+
+.token-wait-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.token-wait-ai {
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    margin-top: var(--space-1);
+}
+
+.token-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-top: var(--space-8);
+    animation: fadeInUp 0.5s ease-out 0.6s both;
+}
+
+.token-qr-placeholder {
+    width: 120px;
+    height: 120px;
+    background: white;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--space-6) auto 0;
+    padding: var(--space-2);
+}
+
+.token-qr-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
